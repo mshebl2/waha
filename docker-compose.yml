@@ -1,0 +1,18 @@
+services:
+  waha:
+    image: devlikeapro/waha:latest
+    container_name: waha_service
+    restart: always
+    ports:
+      - "${WAHA_PORT:-3000}:3000"
+    environment:
+      # MongoDB Atlas Session Persistence
+      - WHATSAPP_SESSIONS_MONGO_URL=${WHATSAPP_SESSIONS_MONGO_URL}
+      - WHATSAPP_DEFAULT_ENGINE=${WHATSAPP_DEFAULT_ENGINE:-NOWEB}
+      - WAHA_API_KEY=${WAHA_API_KEY}
+      - WAHA_DASHBOARD_ENABLED=${WAHA_DASHBOARD_ENABLED:-True}
+      - WAHA_DASHBOARD_USERNAME=${WAHA_DASHBOARD_USERNAME:-admin}
+      - WAHA_DASHBOARD_PASSWORD=${WAHA_DASHBOARD_PASSWORD:-admin123456}
+      - TZ=Asia/Riyadh
+    env_file:
+      - .env
